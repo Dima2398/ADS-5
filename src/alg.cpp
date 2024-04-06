@@ -66,7 +66,7 @@ return post;
 int eval(std::string pref) {
   // добавьте код
     TStack <int, 100> stack;
-    for (char c : post) {
+    for (char c : pref) {
         if (isDigit(c))
             stack.push(c - '0');
         else if (isOperator(c)) {
