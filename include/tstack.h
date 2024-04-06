@@ -5,11 +5,13 @@
 template<typename T, int size>
 class TStack {
   // добавьте код стека
-private:
-    T arr[size];
+ private:
+    T *arr;
     int top;
-public:
-    TStack(): top(-1) {}
+ public:
+    TStack(): top(-1) {
+        arr = new T[size];
+    }
     T get() const {
     return arr[top];
     }
