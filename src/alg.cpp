@@ -28,7 +28,7 @@ std::string infx2pstfx(std::string inf) {
     for (char c : inf) {
         if (isDigit(c)) {
             count++;
-            if (count == 1){
+            if (count == 1) {
                 post += c;
                 continue;
             }
@@ -70,9 +70,9 @@ int eval(std::string pref) {
   // добавьте код
     TStack <int, 100> stack;
     for (char c : pref) {
-        if (isDigit(c))
+        if (isDigit(c)) {
             stack.push(c - '0');
-        else if (isOperator(c)) {
+        } else if (isOperator(c)) {
             int a = stack.get();
             stack.pop();
             int b = stack.get();
@@ -93,8 +93,9 @@ int eval(std::string pref) {
                 default:
                     continue;
             }
-        } else
+        } else {
             continue;
+        }
         }
 return stack.get();
 }
