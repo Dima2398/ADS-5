@@ -2,7 +2,6 @@
 #include <string>
 #include <map>
 #include "tstack.h"
-#include <iostream>
 
 bool isDigit(char a) {
 return (a >= '0' && a <= '9');
@@ -24,11 +23,16 @@ return 0;
 std::string infx2pstfx(std::string inf) {
   // добавьте код
     std::string post;
+    int count = 0;
     TStack <char, 100> stack;
     for (char c : inf) {
         if (isDigit(c)) {
-            post += c;
-            post += " ";
+            count++;
+            if (count == 1){
+                post += c;
+                continue;
+            }
+            post = post + ' ' + c;
         } else if (isOperator(c)) {
             if (c == '(') {
                 stack.push(c);
@@ -38,15 +42,15 @@ std::string infx2pstfx(std::string inf) {
                 stack.push(c);
             } else if (c == ')') {
                 while (stack.get() != '(') {
-                    post += stack.get();
-                    post += " ";
+                    post = post + ' ' + stack.get();
                     stack.pop();
                 }
                 stack.pop();
             } else {
-                while (!stack.isEmpty() && prioritet(c) <= prioritet(stack.get())) {
-                    post += stack.get();
-                    post += ' ';
+                int a = prioritet(c);
+                int b = prioritet(stack.get());
+                while (!stack.isEmpty() && a <= b) {
+                    post = post + ' ' + stack.get();
                     stack.pop();
                 }
                 stack.push(c);
@@ -54,8 +58,7 @@ std::string infx2pstfx(std::string inf) {
         }
     }
     while (!stack.isEmpty()) {
-        post += stack.get();
-        post += " ";
+        post = post + ' ' + stack.get();
         stack.pop();
     }
 return post;
